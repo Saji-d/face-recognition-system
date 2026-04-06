@@ -1,28 +1,28 @@
-# 🙂 Face Recognition System using LBPH (OpenCV)
+# 🙂 Face Recognition using LBPH (OpenCV)
 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![Face Recognition](https://img.shields.io/badge/Face%20Recognition-4CAF50)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?logo=opencv&logoColor=white)
 
-A classical computer vision project implementing a real-time face recognition system using OpenCV’s LBPH algorithm.
+A classical computer vision project that implements face recognition using OpenCV’s Local Binary Patterns Histogram (LBPH) algorithm, emphasizing traditional feature-based recognition techniques.
 
 ---
 
 ## 📌 Overview
 
-This project builds a **face recognition system** using the **Local Binary Patterns Histogram (LBPH)** algorithm.
+This project implements a **classical face recognition system** using the **Local Binary Patterns Histogram (LBPH)** algorithm provided by OpenCV.
 
-It focuses on **feature-based facial representation**, identity prediction, and robustness to lighting variations, demonstrating classical computer vision techniques as an efficient alternative to deep learning methods.
+The focus is on **feature-based face representation**, identity prediction, and robustness to lighting variations, highlighting traditional computer vision techniques as an alternative to deep learning–based approaches.
 
 ---
 
-## 🚀 Features
+## 🎯 Objectives
 
-- Face detection using OpenCV  
-- Face recognition using LBPH  
-- Real-time identification from images  
-- Lightweight and efficient approach  
+- Detect faces from images using OpenCV  
+- Extract facial features using **Local Binary Patterns (LBP)**  
+- Train an LBPH-based face recognizer  
+- Predict and recognize known faces from test images  
 
 ---
 
@@ -31,29 +31,54 @@ It focuses on **feature-based facial representation**, identity prediction, and 
 **Local Binary Patterns Histogram (LBPH)** works by:
 - Converting pixel neighborhoods into binary patterns  
 - Encoding local texture information  
-- Building histograms for facial features  
-- Comparing histograms for recognition  
+- Building histograms to represent facial features  
+- Comparing histograms for face recognition  
 
-✔ Works well under varying lighting  
-✔ Computationally efficient  
-✔ Interpretable model  
+Key advantages:
+- Works well under varying lighting conditions  
+- Simple and interpretable  
+- Computationally efficient  
 
 ---
 
-## ⚙️ Technologies Used
+## 📂 Dataset
 
-- Python  
-- OpenCV  
-- NumPy  
-- Jupyter Notebook  
+- Face images organized by individual identities  
+- Images are preprocessed through:
+  - Grayscale conversion  
+  - Face detection  
+  - Resizing and normalization  
+
+Each identity is learned during training and later recognized during testing.
+
+---
+
+## ⚙️ Implementation Details
+
+- **Language:** Python  
+- **Library:** OpenCV  
+- **Environment:** Jupyter Notebook  
+
+Core components include:
+- Face detection using OpenCV classifiers  
+- Feature extraction using LBP  
+- Classification using LBPH face recognizer  
 
 ---
 
 ## 📈 Results
 
-- Successfully recognizes known faces  
-- Performs reliably under moderate lighting conditions  
+- Successfully recognizes known faces from test images  
+- Performs reliably under moderate lighting changes  
 - Demonstrates effectiveness of classical vision methods  
+
+---
+
+## 🧪 Key Learnings
+
+- Understanding texture-based feature extraction  
+- Difference between classical and deep learning approaches  
+- Role of preprocessing in face recognition accuracy  
 
 ---
 
@@ -68,4 +93,4 @@ https://github.com/Saji-d/computer-vision-and-pattern-recognition
 
 **Sajidur Rahman Sajid**  
 Computer Science & Engineering (CSE)  
-Aspiring Machine Learning Engineer
+Aspiring **AI / Machine Learning Engineer**
