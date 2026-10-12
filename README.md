@@ -1,96 +1,113 @@
-# 🙂 Face Recognition using LBPH (OpenCV)
+<div align="center">
+  <img src="assets/banner.svg" alt="face-recognition-system banner" width="100%">
+  <p><code>Classical face recognition notebook: Haar cascade detection and an LBPH recognizer trained per identity</code></p>
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![Face Recognition](https://img.shields.io/badge/Face%20Recognition-4CAF50)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?logo=opencv&logoColor=white)
+  ![Status](https://img.shields.io/badge/status-academic-22d3ee?style=flat-square&labelColor=0B0E1A)
+  ![Type](https://img.shields.io/badge/type-classical%20CV-8b7cf6?style=flat-square&labelColor=0B0E1A)
+  ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=c084fc&labelColor=0B0E1A)
+  ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=c084fc&labelColor=0B0E1A)
+  ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=c084fc&labelColor=0B0E1A)
+  ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=c084fc&labelColor=0B0E1A)
 
-A classical computer vision project that implements face recognition using OpenCV’s Local Binary Patterns Histogram (LBPH) algorithm, emphasizing traditional feature-based recognition techniques.
+  <a href="#-overview">Overview</a> · <a href="#-highlights">Highlights</a> · <a href="#-preview">Preview</a> · <a href="#-architecture">Architecture</a> · <a href="#-tech-stack">Tech Stack</a> · <a href="#-getting-started">Getting Started</a> · <a href="#-author">Author</a>
+</div>
 
----
+<img src="assets/divider.svg" alt="" width="100%">
 
-## 📌 Overview
+## ◈ Overview
 
-This project implements a **classical face recognition system** using the **Local Binary Patterns Histogram (LBPH)** algorithm provided by OpenCV.
+A single notebook, `lbph_face_recognition.ipynb`, that trains an OpenCV Local Binary Patterns Histogram (LBPH) recognizer on a folder of face images and then runs it on a live webcam feed.
 
-The focus is on **feature-based face representation**, identity prediction, and robustness to lighting variations, highlighting traditional computer vision techniques as an alternative to deep learning–based approaches.
+This is a **classical computer vision project, not deep learning**. There is no neural network: faces are found with a Haar cascade and identified by comparing local texture histograms. It is an academic exercise that shows what traditional methods can do.
 
----
+**Privacy:** the face datasets used for training are personal and are not included in this repository. No face photos are shipped.
 
-## 🎯 Objectives
+<img src="assets/divider.svg" alt="" width="100%">
 
-- Detect faces from images using OpenCV  
-- Extract facial features using **Local Binary Patterns (LBP)**  
-- Train an LBPH-based face recognizer  
-- Predict and recognize known faces from test images  
+## ◈ Highlights
 
----
+<table>
+<tr>
+<td width="33%" valign="top"><b>Haar cascade detection</b><br>Finds faces in webcam frames with <code>haarcascade_frontalface_default</code>.</td>
+<td width="33%" valign="top"><b>LBPH recognizer</b><br>OpenCV <code>LBPHFaceRecognizer</code> trained with one label per identity.</td>
+<td width="33%" valign="top"><b>Light preprocessing</b><br>Grayscale, 200x200 resize and histogram equalization.</td>
+</tr>
+<tr>
+<td valign="top"><b>Simple augmentation</b><br>Two small rotations and two brightness shifts per image.</td>
+<td valign="top"><b>Unknown handling</b><br>Predictions with an LBPH distance of 80 or more are labelled Unknown.</td>
+<td valign="top"><b>Live loop</b><br>Draws a box and the name on each frame. Press <code>q</code> to quit.</td>
+</tr>
+</table>
 
-## 🧠 Algorithm Used: LBPH
+<img src="assets/divider.svg" alt="" width="100%">
 
-**Local Binary Patterns Histogram (LBPH)** works by:
-- Converting pixel neighborhoods into binary patterns  
-- Encoding local texture information  
-- Building histograms to represent facial features  
-- Comparing histograms for face recognition  
+## ◈ Preview
 
-Key advantages:
-- Works well under varying lighting conditions  
-- Simple and interpretable  
-- Computationally efficient  
+<div align="center">
+  <img src="docs/preview.webp" alt="Preview cover for the face recognition project" width="80%">
+</div>
 
----
+<img src="assets/divider.svg" alt="" width="100%">
 
-## 📂 Dataset
+## ◈ Architecture
 
-- Face images organized by individual identities  
-- Images are preprocessed through:
-  - Grayscale conversion  
-  - Face detection  
-  - Resizing and normalization  
+```mermaid
+flowchart LR
+    A[Folder of images<br/>one sub-folder per person] --> B[Grayscale, resize 200x200,<br/>equalize histogram]
+    B --> C[Augment: rotate and brightness]
+    C --> D[Train LBPH recognizer]
+    E[Webcam frame] --> F[Haar cascade face detection]
+    F --> G[Crop and resize face]
+    D --> H{LBPH predict}
+    G --> H
+    H -->|distance below 80| I[Show name]
+    H -->|otherwise| J[Show Unknown]
+```
 
-Each identity is learned during training and later recognized during testing.
+<img src="assets/divider.svg" alt="" width="100%">
 
----
+## ◈ Tech Stack
 
-## ⚙️ Implementation Details
+| Layer | Technologies | Purpose |
+|---|---|---|
+| Language | Python | Notebook code |
+| Vision | OpenCV (contrib build, for `cv2.face`) | Detection, LBPH training and prediction |
+| Arrays | NumPy | Image and label arrays |
+| Environment | Jupyter | Running the notebook |
 
-- **Language:** Python  
-- **Library:** OpenCV  
-- **Environment:** Jupyter Notebook  
+<img src="assets/divider.svg" alt="" width="100%">
 
-Core components include:
-- Face detection using OpenCV classifiers  
-- Feature extraction using LBP  
-- Classification using LBPH face recognizer  
+## ◈ Getting Started
 
----
+```bash
+git clone https://github.com/Saji-d/face-recognition-system.git
+cd face-recognition-system
+pip install jupyter numpy opencv-contrib-python
+jupyter notebook lbph_face_recognition.ipynb
+```
 
-## 📈 Results
+1. Create a dataset folder with one sub-folder per person containing that person's face images (use your own and get consent).
+2. Edit `dataset_path` in the first cell. It currently holds a Windows path from the author's machine.
+3. Run the cells to train, then run the webcam cell. A camera is required.
 
-- Successfully recognizes known faces from test images  
-- Performs reliably under moderate lighting changes  
-- Demonstrates effectiveness of classical vision methods  
+The notebook trains on the images as given without detecting faces first, so the training images should already be tightly cropped faces.
 
----
+<img src="assets/divider.svg" alt="" width="100%">
 
-## 🧪 Key Learnings
+## ◈ Roadmap
 
-- Understanding texture-based feature extraction  
-- Difference between classical and deep learning approaches  
-- Role of preprocessing in face recognition accuracy  
+- [ ] Detect and crop faces during training as well as at inference
+- [ ] Hold out a test set and report accuracy
+- [ ] Move paths and thresholds into variables or arguments
 
----
+Also part of the wider [computer-vision-and-pattern-recognition](https://github.com/Saji-d/computer-vision-and-pattern-recognition) collection.
 
-## 📎 Note
+<img src="assets/divider.svg" alt="" width="100%">
 
-This project is also part of a broader computer vision repository:  
-https://github.com/Saji-d/computer-vision-and-pattern-recognition
+## ◈ Author
 
----
+**Sajidur Rahman Sajid** - Full-Stack Developer and AI engineer from Dhaka.
 
-## 👤 Author
+[Portfolio](https://www.sajidur.me) · [LinkedIn](https://www.linkedin.com/in/sajidur-rahman-sajid/) · [GitHub](https://github.com/Saji-d) · [Email](mailto:sajidsajidurrahman99@gmail.com)
 
-**Sajidur Rahman Sajid**  
-Computer Science & Engineering (CSE)  
-Aspiring **AI / Machine Learning Engineer**
+<sub>Academic project. No datasets included.</sub>
